@@ -16,13 +16,13 @@
             <p class="text-2xl text-red-700">{{$message}}</p>
             @enderror
             <label>
-                <input type="text" placeholder="password" class="input input-bordered input-info w-full max-w-xs" name="password" >
+                <input type="password" placeholder="password" class="input input-bordered input-info w-full max-w-xs" name="password" >
             </label>
             @error("password")
             <p class="text-2xl text-red-700">{{$message}}</p>
             @enderror
             <label>
-                <input type="text" placeholder="confirm password name" class="input input-bordered input-info w-full max-w-xs" name="password_confirmation">
+                <input type="password" placeholder="confirm password name" class="input input-bordered input-info w-full max-w-xs" name="password_confirmation">
             </label>
             @error("password_confirmation")
             <p class="text-2xl text-red-700">{{$message}}</p>

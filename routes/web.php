@@ -28,6 +28,9 @@ Route::middleware('auth')->group(function (){
     Route::prefix('dashboard')->group(function (){
         Route::post('/', [AuthController::class, 'logout'])->name('logout');
         Route::get('/', [ProfileController::class, 'dashboard'])->name('dashboard');
+        Route::get('edit', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('edit', [ProfileController::class, 'update'])->name('profile.update');
+        Route::delete('/', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });
     Route::prefix('services')->group(function (){
         Route::get('/', [ServiceController::class, 'index'])->name('services.index');
