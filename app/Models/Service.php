@@ -10,6 +10,11 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 class Service extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name',
+        'time',
+        'price',
+    ];
     public function reservations(): HasManyThrough
     {
         return $this->hasManyThrough(Reservation::class, User::class);

@@ -35,10 +35,13 @@ Route::middleware('auth')->group(function (){
     Route::prefix('services')->group(function (){
         Route::get('/', [ServiceController::class, 'index'])->name('services.index');
         Route::get('/create', [ServiceController::class, 'create'])->name('services.create');
+        Route::post('/create', [ServiceController::class, 'store'])->name('services.store');
         Route::get('/{service}/edit', [ServiceController::class, 'edit'])->name('services.edit');
+        Route::patch('/{service}/edit', [ServiceController::class, 'update'])->name('services.update');
         Route::get('/{service}', [ServiceController::class, 'show'])->name('services.show');
         Route::post('/', [ServiceController::class, 'reserve'])->name('services.reserve');
         Route::put('/', [ServiceController::class, 'fastReserve'])->name('services.fast.reserve');
+        Route::delete('/{service}', [ServiceController::class, 'destroy'])->name('service.destroy');
     });
 });
 

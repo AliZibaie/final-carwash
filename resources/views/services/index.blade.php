@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('title', 'services')
 @section('content')
-    <div class="overflow-x-auto mt-8 mx-auto w-3/4 flex">
+    <div class="overflow-x-auto mt-8 mx-auto w-3/4 flex mb-12">
         <table class="table table-zebra">
             <!-- head -->
             <thead>
@@ -22,7 +22,9 @@
                     <td>
                         <div class="flex space-x-2">
                             @can('services_delete')
-                                <form action="" method="">
+                                <form action="{{route('service.destroy', $service)}}" method="post">
+                                    @csrf
+                                    @method('delete')
                                     <button type="submit" class="btn btn-error">
                                         Delete
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M20 6.91L17.09 4L12 9.09L6.91 4L4 6.91L9.09 12L4 17.09L6.91 20L12 14.91L17.09 20L20 17.09L14.91 12L20 6.91Z"/></svg></button>
@@ -36,9 +38,6 @@
                                 @endcan
                             <a href="{{route('services.show', $service)}}" class="btn btn-info">Show
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 9a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5a5 5 0 0 1 5-5a5 5 0 0 1 5 5a5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5Z"/></svg></a>
-                            <a href="{{route('services.reserve', $service)}}" class="btn btn-accent">
-                                reserve
-                                </a>
                         </div>
                     </td>
                 </tr>
@@ -50,4 +49,10 @@
         @endcan
 
     </div>
+    @if(session('success'))
+        <p class="text-success text-2xl text-center mx-auto">{{session('success')}}</p>
+    @endif
+    @if(session('fail'))
+        <p class="text-success text-2xl text-center mx-auto">{{session('fail')}}</p>
+    @endif
 @endsection
