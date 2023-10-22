@@ -15,9 +15,11 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
+            $table->foreignId('user_id')->constrained();
+            $table->time('start_at');
+            $table->time('end_at');
             $table->enum('day',array_map(fn($day)=>$day->name, Day::cases()));
-            $table->enum('station',array_map(fn($day)=>$day->name, Station::cases()));
+            $table->enum('station',array_map(fn($station)=>$station->name, Station::cases()));
             $table->timestamps();
         });
     }

@@ -16,10 +16,11 @@ class ServiceFactory extends Factory
      */
     public function definition(): array
     {
+        $time = [15, 60, 30, 45];
         return [
             'name'=>fake()->name(),
             'price'=>fake()->randomDigitNotZero(),
-            'time'=>fake()->randomDigitNotZero(),
+            'time'=>$time[fake()->numberBetween(0, 3)],
         ];
     }
 }

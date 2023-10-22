@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\TrackingController;
+use App\Http\Controllers\UserStatusController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,9 +42,26 @@ Route::middleware('auth')->group(function (){
         Route::get('/{service}/edit', [ServiceController::class, 'edit'])->name('services.edit');
         Route::patch('/{service}/edit', [ServiceController::class, 'update'])->name('services.update');
         Route::get('/{service}', [ServiceController::class, 'show'])->name('services.show');
-        Route::post('/', [ServiceController::class, 'reserve'])->name('services.reserve');
-        Route::put('/', [ServiceController::class, 'fastReserve'])->name('services.fast.reserve');
+        Route::post('/{service}', [ReservationController::class, 'reserve'])->name('services.reserve');
+        Route::put('/{service}', [ReservationController::class, 'fastReserve'])->name('services.fast.reserve');
         Route::delete('/{service}', [ServiceController::class, 'destroy'])->name('service.destroy');
+    });
+    Route::prefix('trackings')->group(function (){
+        Route::get('/', [TrackingController::class, 'index'])->name('trackings.index');
+        Route::get('/{tracking}/edit', [TrackingController::class, 'edit'])->name('trackings.edit');
+        Route::patch('/{tracking}/edit', [TrackingController::class, 'update'])->name('trackings.update');
+        Route::get('/{tracking}', [TrackingController::class, 'show'])->name('trackings.show');
+        Route::delete('/{tracking}', [TrackingController::class, 'destroy'])->name('tracking.destroy');
+    });
+    Route::prefix('reservations')->group(function (){
+        Route::get('/', [ReservationController::class, 'index'])->name('reservations.index');
+        Route::get('/{service}/index', [ReservationController::class, 'indexFilterByService'])->name('service.reservation');
+        Route::get('/{day}/index', [ReservationController::class, 'indexFilterByDay'])->name('day.reservation');
+
+    });
+    Route::middleware('is_admin')->group(function (){
+       Route::get('users', [UserStatusController::class,'index' ])->name('users.index') ;
+       Route::get('users/{user}', [UserStatusController::class,'show' ])->name('users.show') ;
     });
 });
 

@@ -16,16 +16,18 @@
             <!-- row 1 -->
             @foreach($services as $service)
                 <tr>
-                    <td>{{$service->name}}</td>
-                    <td>{{$service->price}}</td>
-                    <td>{{$service->time}}</td>
+                    <td class="text-lg">{{$service->name}}</td>
+                    <td class="text-lg">{{$service->price}}$</td>
+                    <td class="text-lg">{{$service->time}} min
+                        <svg class="inline" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" d="M3 .5h18m-18 23h18m-15.5 0v-6l2.856-1.714a4.415 4.415 0 0 0 0-7.572L5.5 6.5v-6m13 0v6l-2.856 1.714a4.416 4.416 0 0 0 0 7.572L18.5 17.5v6"/></svg>
+                    </td>
                     <td>
                         <div class="flex space-x-2">
                             @can('services_delete')
                                 <form action="{{route('service.destroy', $service)}}" method="post">
                                     @csrf
                                     @method('delete')
-                                    <button type="submit" class="btn btn-error">
+                                    <button type="submit" class="btn btn-error ">
                                         Delete
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M20 6.91L17.09 4L12 9.09L6.91 4L4 6.91L9.09 12L4 17.09L6.91 20L12 14.91L17.09 20L20 17.09L14.91 12L20 6.91Z"/></svg></button>
                                 </form>
@@ -53,6 +55,6 @@
         <p class="text-success text-2xl text-center mx-auto">{{session('success')}}</p>
     @endif
     @if(session('fail'))
-        <p class="text-success text-2xl text-center mx-auto">{{session('fail')}}</p>
+        <p class="text-error text-2xl text-center mx-auto">{{session('fail')}}</p>
     @endif
 @endsection
