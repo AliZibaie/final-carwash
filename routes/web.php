@@ -55,8 +55,8 @@ Route::middleware('auth')->group(function (){
     });
     Route::prefix('reservations')->group(function (){
         Route::get('/', [ReservationController::class, 'index'])->name('reservations.index');
-        Route::get('/{service}/index', [ReservationController::class, 'indexFilterByService'])->name('service.reservation');
-        Route::get('/{day}/index', [ReservationController::class, 'indexFilterByDay'])->name('day.reservation');
+//
+        Route::post('/indexByDay', [ReservationController::class, 'indexFilterByDay'])->name('filter.day');Route::put('/indexByService', [ReservationController::class, 'indexFilterByService'])->name('filter.service');
 
     });
     Route::middleware('is_admin')->group(function (){

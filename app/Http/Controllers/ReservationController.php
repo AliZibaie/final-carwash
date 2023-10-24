@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\enums\Day;
 use App\Http\Requests\StoreReservationRequest;
 use App\Models\Reservation;
 use App\Models\Service;
@@ -66,19 +67,22 @@ class ReservationController extends Controller
         })->where('day','=', $day,)->where('station', '=', $place)->first();
         return [$check1, $check2];
     }
-    public function indexFilterByService()
+    public function indexFilterByService(Request $request)
     {
-
+        $service = Service::find($request->service);
+        dd($service->reservations);
     }
-    public function indexFilterByDay()
+    public function indexFilterByDay(Request $request)
     {
-
+        $reservations = Reservation::query()->where('day', $request->day)->get();
+        dd($reservations);
     }
 
     public function index()
     {
-        $reservations = Reservation::all();
-        return view('reservations.index', compact('reservations'));
+        $services = Service::all();
+        $days = array_map(fn($day)=>$day->name, Day::cases());
+        return view('reservations.index', compact('services', 'days'));
     }
 
     public function getAvailableTimes($serviceTime, $day, $place) : array
@@ -118,4 +122,5 @@ class ReservationController extends Controller
         }
             return  $start;
     }
+
 }

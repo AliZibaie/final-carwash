@@ -21,7 +21,6 @@
                     <td class="text-lg">{{$reservation->end_at}}</td>
                     <td class="text-lg">{{$reservation->day}}</td>
                     <td class="text-lg">{{$reservation->station}}</td>
-
                     <td>
                         <div class="flex space-x-2">
                                 <form action="{{route('tracking.destroy', $reservation)}}" method="post">
